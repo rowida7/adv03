@@ -1,12 +1,16 @@
 ﻿using Microsoft.VisualBasic;
 using System.Collections.ObjectModel;
 using System.Numerics;
+using System.Runtime.Intrinsics.X86;
+using System.Text.Encodings.Web;
+using System.Xml;
 using System.Xml.Linq;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace adv03
 {
+
     internal class Program
     {
         static void Main(string[] args)
@@ -79,46 +83,82 @@ namespace adv03
             #endregion
 
             #region Exercise 3: Phone Book
-            //Build a phone book application.
-            //1.Create a Collection with 4 contacts(name → phone number)
-            Dictionary<string, string> phoneBook = new(4);
-            //2.Add a new contact using [] syntax (add or update)
-            phoneBook["Ali"] = "0109988004";
-            phoneBook["Ahmed"] = "0100558004";
-            //3.Try adding a duplicate using .Add() — catch the exception and print the error
-            Console.WriteLine("--- Catch The Exception ---");
-            try
-            {
-                phoneBook.Add("Ali", "0109988004");
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            ////Build a phone book application.
+            ////1.Create a Collection with 4 contacts(name → phone number)
+            //Dictionary<string, string> phoneBook = new(4);
+            ////2.Add a new contact using [] syntax (add or update)
+            //phoneBook["Ali"] = "0109988004";
+            //phoneBook["Ahmed"] = "0100558004";
+            ////3.Try adding a duplicate using .Add() — catch the exception and print the error
+            //Console.WriteLine("--- Catch The Exception ---");
+            //try
+            //{
+            //    phoneBook.Add("Ali", "0109988004");
+            //}
+            //catch(Exception ex)
+            //{
+            //    Console.WriteLine(ex.Message);
+            //}
 
-            //4.Try adding a duplicate using .TryAdd() — print whether it succeeded
-            Console.WriteLine("--- TryAdd() ---");
-            if (phoneBook.TryAdd("Ali", "0109988704"))
-                Console.WriteLine("Added Successfully");
-            else
-                Console.WriteLine("Failed to Add");
-            //5.Search for a contact that doesn’t exist
-            Console.WriteLine("--- contact that doesn’t exist ---");
-            Console.WriteLine(phoneBook.ContainsValue("Mohsen"));
-            //6.Get a contact with a fallback of "Not Found"
-            Console.WriteLine("--- Not Found Contact ---");
-            if (phoneBook.TryGetValue("Alaa", out string? value))
-                Console.WriteLine("Found Successfully");
-            else
-                Console.WriteLine("Not Found");
-            //7.Print all Keys on one line, then all Values on another line
-            Console.WriteLine("Keys:");
-            foreach (string key in phoneBook.Keys)
-                Console.Write($"- {key}");
+            ////4.Try adding a duplicate using .TryAdd() — print whether it succeeded
+            //Console.WriteLine("--- TryAdd() ---");
+            //if (phoneBook.TryAdd("Ali", "0109988704"))
+            //    Console.WriteLine("Added Successfully");
+            //else
+            //    Console.WriteLine("Failed to Add");
+            ////5.Search for a contact that doesn’t exist
+            //Console.WriteLine("--- contact that doesn’t exist ---");
+            //Console.WriteLine(phoneBook.ContainsValue("Mohsen"));
+            ////6.Get a contact with a fallback of "Not Found"
+            //Console.WriteLine("--- Not Found Contact ---");
+            //if (phoneBook.TryGetValue("Alaa", out string? value))
+            //    Console.WriteLine("Found Successfully");
+            //else
+            //    Console.WriteLine("Not Found");
+            ////7.Print all Keys on one line, then all Values on another line
+            //Console.WriteLine("Keys:");
+            //foreach (string key in phoneBook.Keys)
+            //    Console.Write($"- {key}");
 
-            Console.WriteLine("Vlaues:");
-            foreach (string val in phoneBook.Values)
-                Console.WriteLine($"- {val}");
+            //Console.WriteLine("Vlaues:");
+            //foreach (string val in phoneBook.Values)
+            //    Console.WriteLine($"- {val}");
+            #endregion
+
+            #region Exercise 4: Unique Email Validator
+            ////Use Collection to manage unique email addresses.
+            ////1.Create a HashSet<string> with a case -insensitive comparer: new
+            ////HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            //HashSet<string> emails = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            ////2.Add these emails: "ahmed@test.com", "AHMED@test.com", "sara@test.com",
+            ////"Sara@Test.Com"
+            //emails.Add("ahmed@test.com");
+            //emails.Add("AHMED@test.com");
+            //emails.Add("sara@test.com");
+            //emails.Add("Sara@Test.Com");
+            ////3.Print Count — how many are actually stored? Explain why.
+            //Console.WriteLine($"Count: {emails.Count}"); //becuz it is case insensitive 
+            ////4.Create two sets: Set A = { 1, 2, 3, 4, 5 } and Set B = { 4,5,6,7,8}
+            //HashSet<int> A = new() { 1, 2, 3, 4, 5 };
+            //HashSet<int> B = new() { 4, 5, 6, 7, 8 };
+            //5.Print the result of: UnionWith, IntersectWith, ExceptWith
+            //Console.Write($"UnionWith:");
+            //A.UnionWith(B);
+            //A.printHashSet<int>();
+
+            //Console.Write($"IntersectWith:"); 
+            //A.IntersectWith(B);
+            //A.printHashSet<int>();
+
+            //Console.Write($"ExceptWith:");
+            //A.ExceptWith(B);
+            //A.printHashSet<int>();
+            ////6.Use IsSubsetOf to check if { 1,2} is a subset of Set A
+            //HashSet<int> smallSet = new() { 1, 2 };
+            //if (smallSet.IsSubsetOf(A))
+            //    Console.WriteLine("{ 1,2} is a subset of Set A");
+            //else
+            //    Console.WriteLine("{ 1,2} is NOT a subset of Set A");
             #endregion
         }
     }
