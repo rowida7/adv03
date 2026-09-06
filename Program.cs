@@ -168,42 +168,61 @@ namespace adv03
             #endregion
 
             #region Exercise 5: Print Queue Simulator
-            //Simulate a printer queue
-            //Create a Queue<string> and enqueue 5 documents: "Report.pdf", "Invoice.pdf",
-            //"Letter.docx", "Resume.pdf", "Photo.jpg"
-            Queue<string> documents = new();
-            documents.Enqueue("Report.pdf");
-            documents.Enqueue("Invoice.pdf");
-            documents.Enqueue("Letter.docx");
-            documents.Enqueue("Resume.pdf");
-            documents.Enqueue("Photo.jpg");
-            //1.Print the queue contents and Count
-            Console.WriteLine("--- Print Queue ---");
-            documents.printQueue();
-            //2.Use Peek to see which document will print next(without removing)
-            Console.WriteLine($"Peek:{documents.Peek()}");
-            //3.Process the queue: Dequeue each document and print "Printing: [name]"
-            while(documents.Count>0)
-            { 
-                string x = documents.Dequeue();
-                Console.WriteLine($"Printing: {x}");
-            }
-            //4.Try TryDequeue on the now-empty queue — what happens?
-            bool res = documents.TryDequeue(out string? result);
-            Console.WriteLine($"Can I Dequeue:{res} --- Value:{result??"null"}");
-            //it tries to dequeue empty queue and return true/return the value in the out if worked
-            //and false/return default value if not
+            ////Simulate a printer queue
+            ////Create a Queue<string> and enqueue 5 documents: "Report.pdf", "Invoice.pdf",
+            ////"Letter.docx", "Resume.pdf", "Photo.jpg"
+            //Queue<string> documents = new();
+            //documents.Enqueue("Report.pdf");
+            //documents.Enqueue("Invoice.pdf");
+            //documents.Enqueue("Letter.docx");
+            //documents.Enqueue("Resume.pdf");
+            //documents.Enqueue("Photo.jpg");
+            ////1.Print the queue contents and Count
+            //Console.WriteLine("--- Print Queue ---");
+            //documents.printQueue();
+            ////2.Use Peek to see which document will print next(without removing)
+            //Console.WriteLine($"Peek:{documents.Peek()}");
+            ////3.Process the queue: Dequeue each document and print "Printing: [name]"
+            //while(documents.Count>0)
+            //{ 
+            //    string x = documents.Dequeue();
+            //    Console.WriteLine($"Printing: {x}");
+            //}
+            ////4.Try TryDequeue on the now-empty queue — what happens?
+            //bool res = documents.TryDequeue(out string? result);
+            //Console.WriteLine($"Can I Dequeue:{res} --- Value:{result??"null"}");
+            ////it tries to dequeue empty queue and return true/return the value in the out if worked
+            ////and false/return default value if not
             #endregion
 
             #region Exercise 6: Browser History (Undo)
             //Simulate browser back / forward
             //Create a Stack<string> for browser history
+            Stack<string> history = new();
             //1.Push 5 URLs: "google.com", "github.com", "stackoverflow.com", "youtube.com",
             //"claude.ai"
+            history.Push("google.com");
+            history.Push("github.com");
+            history.Push("stackoverflow.com");
+            history.Push("youtube.com");
+            history.Push("claude.ai");
             //2.Use Peek to see the current page(top of stack)
+            Console.WriteLine($"Peek: {history.Peek()}");
+            Console.WriteLine($"-------------");
             //3.Press "back" 3 times using Pop — print each page you leave
+            for (int i = 0; i < 3; i++)
+            {
+                string x = history.Pop();
+                Console.WriteLine(x);
+            }
+            Console.WriteLine($"-------------");
             //4.Print the current page after going back
+            Console.WriteLine($"Current Page: {history.Peek()}");
             //5.Try TryPop on an empty stack — what happens?
+            bool res = history.TryPop(out string? result);
+            Console.WriteLine($"Can I Pop:{res} --- Value:{result ?? "null"}");
+            //it tries to pop empty stack and return true/return the value in the out if worked
+            //and false/return default value if not
             #endregion
         }
     }
