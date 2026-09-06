@@ -17,5 +17,15 @@ namespace adv03
                 Console.WriteLine();
             }
         }
+        public static void printQueue<T>(this Queue<T> queue)
+        {
+            if (queue is not null && queue.Count > 0)
+            {
+                foreach (T val in queue)
+                {
+                    Console.WriteLine($"{val}");
+                }
+            }
+        }
     }
 }

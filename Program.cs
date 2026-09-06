@@ -1,8 +1,14 @@
 ﻿using Microsoft.VisualBasic;
+using System.Collections;
 using System.Collections.ObjectModel;
+using System.Drawing;
 using System.Numerics;
+using System.Reflection;
+using System.Reflection.Metadata;
+using System.Runtime.Intrinsics.Arm;
 using System.Runtime.Intrinsics.X86;
 using System.Text.Encodings.Web;
+using System.Timers;
 using System.Xml;
 using System.Xml.Linq;
 using static System.Net.Mime.MediaTypeNames;
@@ -159,6 +165,45 @@ namespace adv03
             //    Console.WriteLine("{ 1,2} is a subset of Set A");
             //else
             //    Console.WriteLine("{ 1,2} is NOT a subset of Set A");
+            #endregion
+
+            #region Exercise 5: Print Queue Simulator
+            //Simulate a printer queue
+            //Create a Queue<string> and enqueue 5 documents: "Report.pdf", "Invoice.pdf",
+            //"Letter.docx", "Resume.pdf", "Photo.jpg"
+            Queue<string> documents = new();
+            documents.Enqueue("Report.pdf");
+            documents.Enqueue("Invoice.pdf");
+            documents.Enqueue("Letter.docx");
+            documents.Enqueue("Resume.pdf");
+            documents.Enqueue("Photo.jpg");
+            //1.Print the queue contents and Count
+            Console.WriteLine("--- Print Queue ---");
+            documents.printQueue();
+            //2.Use Peek to see which document will print next(without removing)
+            Console.WriteLine($"Peek:{documents.Peek()}");
+            //3.Process the queue: Dequeue each document and print "Printing: [name]"
+            while(documents.Count>0)
+            { 
+                string x = documents.Dequeue();
+                Console.WriteLine($"Printing: {x}");
+            }
+            //4.Try TryDequeue on the now-empty queue — what happens?
+            bool res = documents.TryDequeue(out string? result);
+            Console.WriteLine($"Can I Dequeue:{res} --- Value:{result??"null"}");
+            //it tries to dequeue empty queue and return true/return the value in the out if worked
+            //and false/return default value if not
+            #endregion
+
+            #region Exercise 6: Browser History (Undo)
+            //Simulate browser back / forward
+            //Create a Stack<string> for browser history
+            //1.Push 5 URLs: "google.com", "github.com", "stackoverflow.com", "youtube.com",
+            //"claude.ai"
+            //2.Use Peek to see the current page(top of stack)
+            //3.Press "back" 3 times using Pop — print each page you leave
+            //4.Print the current page after going back
+            //5.Try TryPop on an empty stack — what happens?
             #endregion
         }
     }
